@@ -4,7 +4,7 @@ go 1.21.3
 
 require (
 	github.com/pointlander/datum/iris v0.0.0-20200802052503-0ee610caba95
-	github.com/pointlander/matrix v0.0.0-20240117175233-50bdeebd443b
+	github.com/pointlander/matrix v0.0.0-20240118195359-755bfeb0e2cd
 	gonum.org/v1/plot v0.14.0
 )
 
