@@ -26,6 +26,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pointlander/datum/iris v0.0.0-20200802052503-0ee610caba95 h1:K9BmC+t1t+zW2IKR93mcPYbhsijtcsIqwttokvC0g/4=
 github.com/pointlander/datum/iris v0.0.0-20200802052503-0ee610caba95/go.mod h1:zlyed+Td2CpuOq/58UhB8/2grLv71oHWLY2CPscR+2w=
+github.com/pointlander/matrix v0.0.0-20240119014015-52146072945a h1:UHrjMFA5fPTwPk/qjklu65zzNSEixnMnBByjXXN046M=
+github.com/pointlander/matrix v0.0.0-20240119014015-52146072945a/go.mod h1:uV0Qn/6rCMrIh+TFYFGRpVeesmHB/3GftLPXbJUDdqY=
 github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=

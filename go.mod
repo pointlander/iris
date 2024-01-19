@@ -2,8 +2,6 @@ module github.com/pointlander/iris
 
 go 1.21.3
 
-replace github.com/pointlander/matrix => /home/pointlander/projects/matrix
-
 require (
 	github.com/pointlander/datum/iris v0.0.0-20200802052503-0ee610caba95
 	github.com/pointlander/matrix v0.0.0-20240119014015-52146072945a
