@@ -68,7 +68,7 @@ func main() {
 	net := NewNet(1, Inputs+1, Outputs)
 	projection := NewNet(2, Outputs, 2)
 	length := len(data.Fisher)
-	const epochs = 5
+	const epochs = 2
 	points := make(plotter.XYs, len(flowers))
 	for i := 0; i < epochs; i++ {
 		perm := rng.Perm(len(flowers))
