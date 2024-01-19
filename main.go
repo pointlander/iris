@@ -119,8 +119,6 @@ func main() {
 	}
 	gmm := NewGMM()
 	gmm.Clusters = Clusters
-	//gmm.Window = 8
-	//gmm.Epochs = 256
 	out := gmm.GMM(in)
 	for i, value := range out {
 		flowers[i].Cluster = value
