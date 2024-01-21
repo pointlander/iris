@@ -69,7 +69,7 @@ func main() {
 	projection := NewNet(3, Outputs, 2)
 	length := len(data.Fisher)
 	const epochs = 2
-	missing := 0
+	found := 0
 	points := make(plotter.XYs, len(flowers))
 	for i := 0; i < epochs; i++ {
 		perm := rng.Perm(len(flowers))
@@ -98,7 +98,7 @@ func main() {
 				x, y := float64(point.Data[0]), float64(point.Data[1])
 				if !math.IsNaN(x) && !math.IsNaN(y) {
 					points[index] = plotter.XY{X: x, Y: y}
-					missing++
+					found++
 				}
 			} else {
 				projection.Fire(q, k, v)
@@ -120,7 +120,7 @@ func main() {
 		fmt.Println(flowers[i].Cluster, flowers[i].Label)
 	}
 
-	fmt.Println("missing=", missing)
+	fmt.Println("found=", found)
 
 	p := plot.New()
 	if err != nil {
