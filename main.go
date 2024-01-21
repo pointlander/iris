@@ -65,49 +65,42 @@ func main() {
 		flowers[i].Iris = value
 		flowers[i].I = i
 	}
-	net := NewNet(1, Inputs+1, Outputs)
-	projection := NewNet(2, Outputs, 2)
+	net := NewNet(1, Inputs, Outputs)
+	projection := NewNet(3, Outputs, 2)
 	length := len(data.Fisher)
-	const epochs = 1
+	const epochs = 2
+	missing := 0
 	points := make(plotter.XYs, len(flowers))
 	for i := 0; i < epochs; i++ {
 		perm := rng.Perm(len(flowers))
 		for epoch := 0; epoch < length; epoch++ {
 			index := perm[epoch]
-			query := NewMatrix(Inputs+1, 1)
+			query := NewMatrix(Inputs, 1)
 			for _, value := range flowers[index].Measures {
 				query.Data = append(query.Data, float32(value))
 			}
-			query.Data = append(query.Data, 0)
-			key := NewMatrix(Inputs+1, 1)
+			key := NewMatrix(Inputs, 1)
 			for _, value := range flowers[index].Measures {
 				key.Data = append(key.Data, float32(value))
 			}
-			key.Data = append(key.Data, 0)
-			value := NewMatrix(Inputs+1, 1)
+			value := NewMatrix(Inputs, 1)
 			for _, v := range flowers[index].Measures {
 				value.Data = append(value.Data, float32(v))
 			}
-			value.Data = append(value.Data, 0)
 			label := flowers[index].Label
 			entropy, q, k, v := net.Fire(query, key, value)
 			fmt.Println(label, entropy, v.Data)
-			copy(query.Data, q.Data)
-			query.Data[4] = 1
-			copy(key.Data, k.Data)
-			key.Data[4] = 1
-			copy(value.Data, v.Data)
-			value.Data[4] = 1
 			if i == epochs-1 {
-				entropy, q, k, v = net.Fire(query, key, value)
 				flowers[index].Embedding = append(flowers[index].Embedding, q.Data...)
 				flowers[index].Embedding = append(flowers[index].Embedding, k.Data...)
 				flowers[index].Embedding = append(flowers[index].Embedding, v.Data...)
 				_, _, _, point := projection.Fire(q, k, v)
-				points[index] = plotter.XY{X: float64(point.Data[0]), Y: float64(point.Data[1])}
-				fmt.Println(label, entropy, v.Data)
+				x, y := float64(point.Data[0]), float64(point.Data[1])
+				if !math.IsNaN(x) && !math.IsNaN(y) {
+					points[index] = plotter.XY{X: x, Y: y}
+					missing++
+				}
 			} else {
-				entropy, q, k, v = net.Fire(query, key, value)
 				projection.Fire(q, k, v)
 				fmt.Println(label, entropy, v.Data)
 			}
@@ -126,6 +119,8 @@ func main() {
 	for i := range flowers {
 		fmt.Println(flowers[i].Cluster, flowers[i].Label)
 	}
+
+	fmt.Println("missing=", missing)
 
 	p := plot.New()
 	if err != nil {
